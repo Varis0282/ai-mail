@@ -1,8 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { sendEmail } from "@/lib/nodemailer";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request, res: NextApiResponse) {
+export async function POST(req: Request) {
     const data = await req.json();
     const { to, subject, body } = data;
     try {
