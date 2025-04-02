@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { sendEmail } from "@/lib/nodemailer";
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/lib/db";
-import EmailOpen from "@/models/schema";
+import { Email } from "@/models/schema";
 
 export async function POST(req: Request) {
     const data = await req.json();
@@ -14,6 +14,16 @@ export async function POST(req: Request) {
 
     try {
         const result = await sendEmail(to, subject, body, emailId);
+
+        const newEmail = new Email({
+            recipient: to,
+            subject,
+            body,
+            emailId,
+        });
+        await newEmail.save();
+        console.log("Email sent: ", result);
+
         return NextResponse.json({ result, emailId });
     } catch (err: any) {
         console.log(err);
