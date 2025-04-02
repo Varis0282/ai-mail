@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/db';
-import EmailOpen from '@/models/schema';
+import { EmailOpen } from '@/models/schema';
 
 export async function GET(req: Request) {
     await connectToDatabase();
