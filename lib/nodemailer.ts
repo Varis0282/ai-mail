@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import path from "path";
+import fs from "fs";
 
 export async function sendEmail(to: string, subject: string, body: string, emailId: string) {
     const transporter = nodemailer.createTransport({
@@ -23,6 +25,14 @@ export async function sendEmail(to: string, subject: string, body: string, email
         to,
         subject,
         html: htmlBody,
+        attachments: [
+            {
+                filename: "Varis Rajak Resume.pdf", // What the recipient sees
+                path: path.join(process.cwd(), "public/Varis-Rajak-Updated-Resume.pdf"), // Change this path as needed
+                contentType: "application/pdf",
+            },
+        ],
+
     });
 
     return info;
