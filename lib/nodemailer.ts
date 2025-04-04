@@ -10,7 +10,7 @@ export async function sendEmail(to: string, subject: string, body: string, email
             pass: process.env.EMAIL_PASSWORD,
         },
     });
-
+    
     const pixelUrl = `https://ai-mail-generator.netlify.app/api/email/open?emailId=${emailId}`;
 
     const htmlBody = `
